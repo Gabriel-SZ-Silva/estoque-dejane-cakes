@@ -39,6 +39,7 @@ Não introduza Spring, Maven, Gradle, Hibernate, Lombok ou frameworks de front-e
 ├── AGENTS.md                  este arquivo
 ├── README.md                  apresentação do projeto (visão geral e início rápido)
 ├── CHANGELOG.md               histórico de versões
+├── CONTRIBUTING.md            fluxo de branches e pull requests, convenções, como rodar localmente
 ├── LICENSE                    licença MIT (Gabriel Souza Silva)
 ├── NOTICE                     itens fora da MIT: MySQL Connector/J e marca Dejane Cakes
 ├── .gitattributes             força LF nos scripts de servidor
@@ -143,7 +144,18 @@ Depois de qualquer reorganização, confirme no mínimo: `docker build .` passa 
 - Autoria: Gabriel Souza Silva é o autor e mantenedor; quem contribui aparece como contribuidor pelos próprios commits e pull requests. Nunca altere a autoria de commits de outras pessoas.
 - Não reformatar arquivos inteiros sem pedido: diffs pequenos facilitam a revisão do dono.
 
-## 10. Ideias de organização (só faça o que o dono pedir)
+## 10. Fluxo de branches e pull requests
+
+O repositório tem colaboradores. O fluxo completo está no `CONTRIBUTING.md`; o essencial:
+
+- Nunca trabalhe nem envie commits direto na `main`. Crie uma branch a partir da `main` atualizada: `feature/<assunto>`, `fix/<assunto>` ou `docs/<assunto>`.
+- Toda mudança chega à `main` por pull request, com o modelo preenchido (o que mudou, como testar, migração de banco, impacto na produção), o workflow **Build** passando e a aprovação do mantenedor.
+- Abra o pull request e pare: o merge é feito pelo mantenedor, depois da revisão.
+- Nunca reescreva o histórico da `main` (`commit --amend`, `rebase` ou `push --force`). Numa branch que outras pessoas já baixaram, também não, sem combinar.
+- Não altere a autoria de commits de outras pessoas.
+- Só o que está na `main` vai para produção, e quem atualiza o servidor é o mantenedor.
+
+## 11. Ideias de organização (só faça o que o dono pedir)
 
 Já feito: `docs/`, `LICENSE` (MIT) com `NOTICE`, `CHANGELOG.md`, `.gitattributes` e o workflow de build. Ainda em aberto:
 

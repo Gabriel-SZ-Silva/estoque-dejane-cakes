@@ -5,6 +5,8 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 ## [Não lançado]
 
 ### Adicionado
+- `CONTRIBUTING.md` com o fluxo de branches e pull requests, as convenções de commit e de código, como rodar localmente e os cuidados com o banco em produção.
+- Seção "Fluxo de branches e pull requests" no `AGENTS.md`.
 - `NOTICE` com os itens que não estão cobertos pela licença MIT: o MySQL Connector/J (licença própria da Oracle) e a marca e a logomarca "Dejane Cakes".
 
 ### Alterado
