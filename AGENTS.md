@@ -164,7 +164,7 @@ O repositório tem colaboradores. O fluxo completo está no `CONTRIBUTING.md`; o
 
 Já feito: `docs/`, `LICENSE` (MIT) com `NOTICE`, `CHANGELOG.md`, `.gitattributes`, o workflow de build, `CONTRIBUTING.md` e os modelos de issue e de pull request. Ainda em aberto:
 
-- Capturas de tela das principais telas em `docs/imagens/`, referenciadas no README.
+- Capturas de tela reais das principais telas em `docs/assets/`, referenciadas no README.
 - Testes JUnit em `test/`.
 - Mover `deploy/atualiza-usuarios.sql` para `deploy/migracoes/` (lembrando de atualizar README e instruções).
 
