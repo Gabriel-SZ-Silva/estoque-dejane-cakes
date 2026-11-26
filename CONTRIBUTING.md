@@ -20,7 +20,7 @@ Obrigado por contribuir com o Estoque Dejane Cakes. O sistema está **em produç
    | `docs/` | Só documentação | `docs/guia-operacao` |
 
 3. **Commits.** Pequenos e com um assunto cada (veja [Convenções](#convenções)).
-4. **Pull request.** Envie a branch (`git push -u origin <branch>`) e abra um pull request para a `main`. Preencha o modelo que aparece na descrição: o que mudou, como testar, se há migração de banco e se afeta a produção.
+4. **Pull request.** Envie a branch (`git push -u origin <branch>`) e abra um pull request para a `main`. Preencha o [modelo](.github/pull_request_template.md) que aparece na descrição: o que mudou, como testar, se há migração de banco e se afeta a produção.
 5. **Revisão.** O pull request só é integrado com o workflow **Build** passando e a aprovação do mantenedor. Ninguém envia commits direto para a `main`.
 6. **Integração e publicação.** Quem faz o merge é o mantenedor. Só o que está na `main` vai para o servidor, e quem atualiza o servidor é o mantenedor.
 
@@ -80,6 +80,10 @@ O projeto ainda não tem testes automatizados. Confira pelo menos:
 - o sistema sobe localmente e as telas afetadas funcionam no navegador;
 - se a mudança mexe em permissões, confira também com uma conta `VISITANTE` (crie com `bash deploy/usuarios.sh criar <login> visitante`, com os containers rodando);
 - `docs/` e `CHANGELOG.md` estão atualizados.
+
+## Relatar erros e sugerir melhorias
+
+Abra uma issue com o modelo [Relato de erro](.github/ISSUE_TEMPLATE/bug_report.md) ou [Sugestão de melhoria](.github/ISSUE_TEMPLATE/feature_request.md). Para trabalhar numa issue, mencione o número dela no pull request.
 
 ## Banco de dados e produção
 

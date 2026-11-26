@@ -43,7 +43,10 @@ Não introduza Spring, Maven, Gradle, Hibernate, Lombok ou frameworks de front-e
 ├── LICENSE                    licença MIT (Gabriel Souza Silva)
 ├── NOTICE                     itens fora da MIT: MySQL Connector/J e marca Dejane Cakes
 ├── .gitattributes             força LF nos scripts de servidor
-├── .github/workflows/build.yml compila com `docker build .` a cada push
+├── .github/
+│   ├── workflows/build.yml    compila com `docker build .` a cada push na main e em pull requests
+│   ├── pull_request_template.md modelo de pull request
+│   └── ISSUE_TEMPLATE/        modelos de relato de erro e de sugestão de melhoria
 ├── docs/                      regras de negócio, arquitetura, instalação, publicação e operação
 ├── banco.sql                  cria o banco completo (usado pelo Docker na 1ª subida)
 ├── Dockerfile                 compila e empacota o app no Tomcat
@@ -157,10 +160,9 @@ O repositório tem colaboradores. O fluxo completo está no `CONTRIBUTING.md`; o
 
 ## 11. Ideias de organização (só faça o que o dono pedir)
 
-Já feito: `docs/`, `LICENSE` (MIT) com `NOTICE`, `CHANGELOG.md`, `.gitattributes` e o workflow de build. Ainda em aberto:
+Já feito: `docs/`, `LICENSE` (MIT) com `NOTICE`, `CHANGELOG.md`, `.gitattributes`, o workflow de build, `CONTRIBUTING.md` e os modelos de issue e de pull request. Ainda em aberto:
 
 - Capturas de tela das principais telas em `docs/imagens/`, referenciadas no README.
-- Modelos de issue e de pull request em `.github/`.
 - Testes JUnit em `test/`.
 - Mover `deploy/atualiza-usuarios.sql` para `deploy/migracoes/` (lembrando de atualizar README e instruções).
 
