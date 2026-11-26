@@ -2,6 +2,14 @@
 
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). Datas no formato AAAA-MM-DD.
 
+## [Não lançado]
+
+### Adicionado
+- `NOTICE` com os itens que não estão cobertos pela licença MIT: o MySQL Connector/J (licença própria da Oracle) e a marca e a logomarca "Dejane Cakes".
+
+### Alterado
+- Licença trocada de "todos os direitos reservados" para MIT, em nome de Gabriel Souza Silva. README e `AGENTS.md` atualizados.
+
 ## [1.1.0] - 2026-11-23
 
 ### Adicionado

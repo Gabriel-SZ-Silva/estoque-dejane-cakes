@@ -38,7 +38,8 @@ Não introduza Spring, Maven, Gradle, Hibernate, Lombok ou frameworks de front-e
 ├── AGENTS.md                  este arquivo
 ├── README.md                  apresentação do projeto (visão geral e início rápido)
 ├── CHANGELOG.md               histórico de versões
-├── LICENSE                    todos os direitos reservados (não trocar sem o dono)
+├── LICENSE                    licença MIT (Gabriel Souza Silva)
+├── NOTICE                     itens fora da MIT: MySQL Connector/J e marca Dejane Cakes
 ├── .gitattributes             força LF nos scripts de servidor
 ├── .github/workflows/build.yml compila com `docker build .` a cada push
 ├── docs/                      regras de negócio, arquitetura, instalação, publicação e operação
@@ -142,7 +143,7 @@ Depois de qualquer reorganização, confirme no mínimo: `docker build .` passa 
 
 ## 10. Ideias de organização (só faça o que o dono pedir)
 
-Já feito: `docs/`, `LICENSE` (todos os direitos reservados), `CHANGELOG.md`, `.gitattributes` e o workflow de build. Ainda em aberto:
+Já feito: `docs/`, `LICENSE` (MIT) com `NOTICE`, `CHANGELOG.md`, `.gitattributes` e o workflow de build. Ainda em aberto:
 
 - Capturas de tela das principais telas em `docs/imagens/`, referenciadas no README.
 - Modelos de issue e de pull request em `.github/`.

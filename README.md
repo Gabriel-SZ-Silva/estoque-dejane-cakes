@@ -11,7 +11,7 @@
 ![MySQL 8.4](https://img.shields.io/badge/MySQL-8.4-2A1517)
 ![Docker Compose](https://img.shields.io/badge/Docker-Compose-2A1517)
 ![Status](https://img.shields.io/badge/status-em%20produ%C3%A7%C3%A3o-2e7d32)
-![Licença](https://img.shields.io/badge/licen%C3%A7a-todos%20os%20direitos%20reservados-555555)
+[![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-555555)](LICENSE)
 
 </div>
 
@@ -129,4 +129,9 @@ Desenvolvido pela **Equipe SaaSquad**, como projeto acadêmico na Universidade d
 
 ## Licença
 
-© 2026 Equipe SaaSquad. Todos os direitos reservados. O código está disponível para consulta; uso, cópia ou distribuição dependem de autorização prévia. Veja [LICENSE](LICENSE).
+Distribuído sob a licença MIT. Veja [LICENSE](LICENSE).
+
+Não estão cobertos pela licença MIT (detalhes em [NOTICE](NOTICE)):
+
+- o MySQL Connector/J incluído em `web/WEB-INF/lib`, distribuído pela Oracle sob licença própria (GPLv2 com a exceção para software livre e de código aberto);
+- a marca e a logomarca "Dejane Cakes" (`web/img/logo.jpg` e os ícones do app), que pertencem à sua titular.
