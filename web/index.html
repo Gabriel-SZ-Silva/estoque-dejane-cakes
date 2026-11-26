@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Dejane Cakes</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#aa0000">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="img/icone-192.png">
+    <link rel="apple-touch-icon" href="img/icone-192.png">
+</head>
+<body class="centro">
+    <div class="card">
+        <img src="img/logo.jpg" class="logo" alt="Logomarca Dejane Bolos e Doces">
+        <h1>Controle de Estoque</h1>
+
+        <a href="formCadastrarInsumo.jsp" class="btn-menu">➕ Novo Insumo</a>
+
+        <a href="ControleConfeitaria?acao=ConsultaTodos&entidade=Insumo" class="btn-menu btn-outline">📦 Ver Insumos em Estoque</a>
+
+        <a href="ControleConfeitaria?acao=ConsultaTodos&entidade=Receita" class="btn-menu btn-outline">📖 Receitas</a>
+
+        <a href="ControleConfeitaria?acao=ConsultaTodos&entidade=Movimentacao" class="btn-menu btn-outline">📊 Dashboard</a>
+
+        <a href="ControleConfeitaria?acao=ConsultaTodos&entidade=Lixeira" class="btn-menu btn-outline">🗑️ Lixeira</a>
+
+        <a href="ControleConfeitaria?acao=Sai&entidade=Usuario" class="btn-voltar">Sair do sistema</a>
+    </div>
+    <script>
+        // Ativa o modo "app" no celular (ver sw.js).
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(function () { /* sem app offline neste navegador; o sistema segue normal */ });
+        }
+    </script>
+</body>
+</html>

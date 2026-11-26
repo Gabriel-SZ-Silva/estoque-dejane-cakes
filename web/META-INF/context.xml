@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/SistemaConfeitaria">
+    <!-- No servidor, o Caddy recebe o HTTPS e repassa ao Tomcat. Esta válvula faz o Tomcat
+         enxergar o protocolo (https) e o endereço reais de quem acessa. Localmente, não muda nada. -->
+    <Valve className="org.apache.catalina.valves.RemoteIpValve" protocolHeader="X-Forwarded-Proto"/>
+    <!-- Cookie de sessão com SameSite=Lax: o navegador não o envia em formulários vindos de outros sites. -->
+    <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor" sameSiteCookies="lax"/>
+</Context>

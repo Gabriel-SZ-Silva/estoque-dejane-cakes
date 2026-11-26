@@ -1,0 +1,24 @@
+# Ajustes para servidores com pouca memória (1 GB), como a VM gratuita B2ats v2 da Azure.
+# O Docker Compose lê este arquivo sozinho junto com o docker-compose.yml.
+# Num servidor com 4 GB ou mais, pode apagar este arquivo.
+
+services:
+  banco:
+    # Mantém o fuso de Brasília e reduz o consumo do MySQL (de ~400 MB para ~150 MB).
+    command:
+      - --default-time-zone=-03:00
+      - --performance-schema=OFF
+      - --innodb-buffer-pool-size=64M
+      - --innodb-log-buffer-size=4M
+      - --max-connections=30
+      - --table-open-cache=200
+    mem_limit: 350m
+
+  app:
+    environment:
+      # Limita a memória do Java dentro do Tomcat.
+      CATALINA_OPTS: "-Xms64m -Xmx256m -XX:MaxMetaspaceSize=128m -XX:+UseSerialGC -Xss512k"
+    mem_limit: 450m
+
+  caddy:
+    mem_limit: 64m

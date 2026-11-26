@@ -1,0 +1,6 @@
+# O Caddy recebe os acessos da internet, pede e renova sozinho o certificado HTTPS (Let's Encrypt)
+# e repassa tudo para o Tomcat. O endereço vem da variável DOMINIO do arquivo .env.
+{$DOMINIO} {
+	encode gzip
+	reverse_proxy app:8080
+}
