@@ -1,0 +1,16 @@
+name: Build
+
+# Compila a aplicação a cada envio e em cada pull request.
+# A imagem Docker roda o javac em todo o código: se algum arquivo não compilar, o build falha.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compilar com Docker
+        run: docker build -t estoque-dejane-cakes .
