@@ -6,22 +6,40 @@
 
 **Controle de insumos, receitas e produção para uma confeitaria artesanal.**
 
+[![Build](https://github.com/Gabriel-SZ-Silva/estoque-dejane-cakes/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/Gabriel-SZ-Silva/estoque-dejane-cakes/actions/workflows/build.yml)
 ![Java 25](https://img.shields.io/badge/Java-25-aa0000)
 ![Jakarta EE](https://img.shields.io/badge/Servlet%2FJSP-Tomcat%2011-aa0000)
 ![MySQL 8.4](https://img.shields.io/badge/MySQL-8.4-2A1517)
 ![Docker Compose](https://img.shields.io/badge/Docker-Compose-2A1517)
 ![Status](https://img.shields.io/badge/status-em%20produ%C3%A7%C3%A3o-2e7d32)
-![Licença](https://img.shields.io/badge/licen%C3%A7a-todos%20os%20direitos%20reservados-555555)
+[![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-555555)](LICENSE)
 
 </div>
 
 ---
 
+## Sumário
+
+- [Sobre o projeto](#sobre-o-projeto)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologias](#tecnologias)
+- [Arquitetura](#arquitetura)
+- [Topologia de infraestrutura](#topologia-de-infraestrutura)
+- [Começando](#começando)
+- [Configuração](#configuração)
+- [Estrutura do projeto](#estrutura-do-projeto)
+- [Documentação](#documentação)
+- [Testes](#testes)
+- [Próximos passos](#próximos-passos)
+- [Autor](#autor)
+- [Contribuidores](#contribuidores)
+- [Licença](#licença)
+
 ## Sobre o projeto
 
 A Dejane Cakes é uma confeitaria MEI de Mogi das Cruzes (SP) que controlava o estoque e os pedidos em cadernos. Este sistema substitui o controle manual do estoque: mostra o que há em cada insumo, avisa o que está vencendo, diz se cada receita pode ser feita com o estoque atual e desconta os ingredientes automaticamente a cada produção.
 
-O MVP está **em produção desde 23/11/2026**, acessível pelo navegador do computador ou instalado como app no celular.
+O MVP está **em produção desde 23/11/2026**, acessível pelo navegador do computador ou instalado como app no celular. O projeto foi iniciado como trabalho acadêmico na Universidade de Mogi das Cruzes (UMC).
 
 ## Funcionalidades
 
@@ -62,6 +80,30 @@ flowchart LR
 
 Aplicação em camadas com os padrões **Front Controller**, **Command**, **Factory**, **DAO** e **Decorator**, seguindo os princípios SOLID. Detalhes, modelo de dados e medidas de segurança em [docs/arquitetura.md](docs/arquitetura.md).
 
+## Topologia de infraestrutura
+
+Em produção, o sistema roda numa VM Ubuntu 24.04 da Microsoft Azure (Azure for Students, 1 GB de RAM + 2 GB de swap), com três containers do Docker Compose. Só o Caddy publica portas para a internet; o Tomcat e o MySQL ficam na rede interna do Compose. O endereço é um subdomínio do DuckDNS.
+
+```mermaid
+flowchart LR
+    U[Navegador ou app PWA] -->|HTTPS 80/443| CADDY
+    subgraph VM["VM Ubuntu 24.04 · Docker Compose"]
+        CADDY[caddy<br/>Caddy 2] -->|HTTP 8080| APP[app<br/>Tomcat 11 + Java 25]
+        APP -->|JDBC 3306| BANCO[(banco<br/>MySQL 8.4)]
+        BANCO --- VOL[(volume dados-mysql)]
+        CRON[cron 03:00<br/>deploy/backup.sh] -->|mysqldump| BANCO
+        CRON --> BKP[backups/<br/>14 dias]
+    end
+```
+
+| Serviço | Imagem | Portas | Memória (override) | Dados |
+| --- | --- | --- | --- | --- |
+| `caddy` | `caddy:2` | 80 e 443, publicadas | 64 MB | Volumes `dados-caddy` e `config-caddy` (certificados) |
+| `app` | Build do `Dockerfile` (Tomcat 11, Java 25) | 8080, só na rede interna | 450 MB | Nenhum |
+| `banco` | `mysql:8.4` | 3306, só na rede interna | 350 MB | Volume `dados-mysql` |
+
+Os limites de memória vêm do `docker-compose.override.yml`. Detalhes em [docs/publicacao.md](docs/publicacao.md) e [docs/operacao.md](docs/operacao.md).
+
 ## Começando
 
 ### Com Docker (recomendado)
@@ -76,6 +118,21 @@ docker compose up -d --build
 ```
 
 Acesse `https://<DOMINIO>` e use **Primeiro acesso** com o `CODIGO_INSTALACAO` do `.env`.
+
+### Atalhos com make
+
+Em Linux e macOS, o `Makefile` encurta os comandos mais usados. No Windows, ou sem `make`, use os comandos da segunda coluna.
+
+| Atalho | Comando | O que faz |
+| --- | --- | --- |
+| `make build` | `docker build -t estoque-dejane-cakes .` | Compila a aplicação, como o workflow Build |
+| `make up` | `docker compose up -d --build` | Sobe banco, app e Caddy (exige o `.env` preenchido) |
+| `make down` | `docker compose down` | Para os containers e mantém os dados do banco |
+| `make logs` | `docker compose logs -f --tail=100` | Acompanha os logs (`make logs SERVICO=app` para um serviço só) |
+| `make ps` | `docker compose ps` | Mostra a situação dos containers |
+| `make backup` | `bash deploy/backup.sh` | Gera uma cópia do banco em `backups/` |
+
+`make` sem alvo lista os atalhos. Nenhum deles apaga o volume do banco.
 
 ### Com NetBeans
 
@@ -95,16 +152,21 @@ Variáveis do arquivo `.env` (modelo em [.env.exemplo](.env.exemplo)):
 ## Estrutura do projeto
 
 ```
+├── .github/           workflow Build e modelos de pull request e de issue
 ├── src/java/          código Java (controller, command, factory, dao, model, decorator, filter, util)
 ├── web/               telas JSP, CSS, imagens, PWA e WEB-INF
 ├── deploy/            Caddyfile, backup, restauração, gestão de contas e migrações
-├── docs/              documentação detalhada
+├── docs/              documentação detalhada (índice em docs/README.md)
 ├── banco.sql          criação do banco
 ├── Dockerfile         build da aplicação
-└── docker-compose.yml banco, aplicação e HTTPS
+├── docker-compose.yml banco, aplicação e HTTPS
+├── Makefile           atalhos para os comandos do Docker Compose
+└── CONTRIBUTING.md    como contribuir
 ```
 
 ## Documentação
+
+O índice completo está em [docs/README.md](docs/README.md).
 
 | Documento | Conteúdo |
 | --- | --- |
@@ -115,6 +177,10 @@ Variáveis do arquivo `.env` (modelo em [.env.exemplo](.env.exemplo)):
 | [Operação](docs/operacao.md) | Contas de usuário, backup, restauração e diagnóstico |
 | [Histórico de versões](CHANGELOG.md) | O que mudou em cada versão |
 
+## Testes
+
+Ainda não há testes automatizados. O workflow **Build** compila a aplicação com `docker build .` a cada envio para a `main` e em cada pull request (localmente: `make build`).
+
 ## Próximos passos
 
 - [ ] Registrar no histórico qual usuário fez cada operação
@@ -123,10 +189,22 @@ Variáveis do arquivo `.env` (modelo em [.env.exemplo](.env.exemplo)):
 - [ ] Módulo de encomendas
 - [ ] Testes automatizados
 
-## Equipe
+## Autor
 
-Desenvolvido pela **Equipe SaaSquad**, como projeto acadêmico na Universidade de Mogi das Cruzes (UMC), para a Dejane Cakes.
+**Gabriel Souza Silva**, autor e mantenedor.
+
+- GitHub: [Gabriel-SZ-Silva](https://github.com/Gabriel-SZ-Silva)
+- LinkedIn: [gabriel-souza-silva-6689a93b6](https://www.linkedin.com/in/gabriel-souza-silva-6689a93b6)
+
+## Contribuidores
+
+O projeto aceita contribuições por pull request. Cada colaborador trabalha numa branch própria, abre um pull request para a `main` e o mantenedor revisa antes de integrar. Os colaboradores aparecem pelos pull requests aceitos e pela [página de contribuidores](https://github.com/Gabriel-SZ-Silva/estoque-dejane-cakes/graphs/contributors) do GitHub. Para contribuir, leia o [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Licença
 
-© 2026 Equipe SaaSquad. Todos os direitos reservados. O código está disponível para consulta; uso, cópia ou distribuição dependem de autorização prévia. Veja [LICENSE](LICENSE).
+Distribuído sob a licença MIT. Veja [LICENSE](LICENSE).
+
+Não estão cobertos pela licença MIT (detalhes em [NOTICE](NOTICE)):
+
+- o MySQL Connector/J incluído em `web/WEB-INF/lib`, distribuído pela Oracle sob licença própria (GPLv2 com a exceção para software livre e de código aberto);
+- a marca e a logomarca "Dejane Cakes" (`web/img/logo.jpg` e os ícones do app), que pertencem à sua titular.

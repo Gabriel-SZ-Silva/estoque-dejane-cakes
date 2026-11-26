@@ -1,0 +1,17 @@
+Estoque Dejane Cakes
+Copyright (c) 2026 Gabriel Souza Silva
+
+O código deste repositório é distribuído sob a licença MIT (veja o arquivo
+LICENSE). Os itens abaixo NÃO estão cobertos por essa licença.
+
+MySQL Connector/J
+-----------------
+O arquivo web/WEB-INF/lib/mysql-connector-j.jar é distribuído pela Oracle sob
+a sua própria licença (GPLv2 com a exceção para software livre e de código
+aberto) e não faz parte da licença MIT deste repositório.
+
+Marca Dejane Cakes
+------------------
+A marca e a logomarca "Dejane Cakes" (web/img/logo.jpg e os ícones
+web/img/icone-*.png) pertencem à sua titular e não podem ser usadas sem
+autorização.

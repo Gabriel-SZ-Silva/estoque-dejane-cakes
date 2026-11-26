@@ -1,6 +1,6 @@
-# AGENTS.md: contexto do projeto para assistentes de IA
+# AGENTS.md: contexto do projeto
 
-Leia este arquivo inteiro antes de mexer no repositório. Ele descreve o que o projeto é, como está organizado, o que **não pode quebrar** e como trabalhar aqui. As instruções do dono do repositório (Gabriel) vêm sempre antes das sugestões deste arquivo.
+Leia este arquivo inteiro antes de mexer no repositório. Ele descreve o que o projeto é, como está organizado, o que **não pode quebrar** e como trabalhar aqui. As instruções do dono do repositório (Gabriel Souza Silva, autor e mantenedor) vêm sempre antes das sugestões deste arquivo.
 
 ## 1. Identificação
 
@@ -9,7 +9,8 @@ Leia este arquivo inteiro antes de mexer no repositório. Ele descreve o que o p
 | Projeto | Sistema de Estoque Dejane Cakes (nome técnico: `SistemaConfeitaria`) |
 | Repositório | `github.com/Gabriel-SZ-Silva/estoque-dejane-cakes`, branch `main` |
 | Cliente | Dejane Cakes, confeitaria MEI em Mogi das Cruzes (SP) |
-| Equipe | SaaSquad (projeto acadêmico, UMC) |
+| Autoria | Gabriel Souza Silva, autor e mantenedor. Colaboradores enviam pull requests e aparecem como contribuidores |
+| Origem | Iniciado como projeto acadêmico na Universidade de Mogi das Cruzes (UMC) |
 | Situação | MVP **em produção** desde 23/11/2026, com dados reais da cliente |
 | Objetivo | Controle de estoque de insumos, receitas e produção (baixa automática), com alertas de validade |
 | Idioma | Português do Brasil em tudo: código, comentários, telas, commits e documentação |
@@ -38,12 +39,18 @@ Não introduza Spring, Maven, Gradle, Hibernate, Lombok ou frameworks de front-e
 ├── AGENTS.md                  este arquivo
 ├── README.md                  apresentação do projeto (visão geral e início rápido)
 ├── CHANGELOG.md               histórico de versões
-├── LICENSE                    todos os direitos reservados (não trocar sem o dono)
+├── CONTRIBUTING.md            fluxo de branches e pull requests, convenções, como rodar localmente
+├── LICENSE                    licença MIT (Gabriel Souza Silva)
+├── NOTICE                     itens fora da MIT: MySQL Connector/J e marca Dejane Cakes
 ├── .gitattributes             força LF nos scripts de servidor
-├── .github/workflows/build.yml compila com `docker build .` a cada push
-├── docs/                      regras de negócio, arquitetura, instalação, publicação e operação
+├── .github/
+│   ├── workflows/build.yml    compila com `docker build .` a cada push na main e em pull requests
+│   ├── pull_request_template.md modelo de pull request
+│   └── ISSUE_TEMPLATE/        modelos de relato de erro e de sugestão de melhoria
+├── docs/                      índice (docs/README.md), regras de negócio, arquitetura, instalação, publicação e operação
 ├── banco.sql                  cria o banco completo (usado pelo Docker na 1ª subida)
 ├── Dockerfile                 compila e empacota o app no Tomcat
+├── Makefile                   atalhos: build, up, down (sem -v), logs, ps, backup
 ├── docker-compose.yml         banco + app + caddy (produção)
 ├── docker-compose.override.yml ajustes para servidor de 1 GB (lido automaticamente)
 ├── .env.exemplo               modelo das variáveis secretas (o .env real nunca vai ao Git)
@@ -119,7 +126,8 @@ O detalhamento está em `docs/regras-de-negocio.md` e `docs/arquitetura.md`. Mud
 ## 7. Como compilar e testar
 
 - **Docker (qualquer sistema):** copie `.env.exemplo` para `.env`, preencha, e rode `docker compose up -d --build`. O app fica atrás do Caddy nas portas 80/443.
-- **Só compilar, para conferir:** `docker build .` (falha se algum `.java` não compilar).
+- **Só compilar, para conferir:** `docker build .` ou `make build` (falha se algum `.java` não compilar).
+- **Atalhos:** o `Makefile` tem `build`, `up`, `down`, `logs`, `ps` e `backup`. O alvo `down` nunca pode ganhar `-v`. Não há alvo `test` porque não há testes; só acrescente um quando existirem testes de verdade.
 - **NetBeans:** abrir a pasta como projeto, Tomcat 11 cadastrado em Servers, MySQL local com o `banco.sql` executado. Sem variáveis de ambiente, `util/FabricaConexao` usa `jdbc:mysql://localhost:3306/dejane_cakes_db` com root/admin (padrão só de desenvolvimento).
 - **Testes automatizados:** ainda não estão no repositório (existiu um roteiro de verificação fora dele). Uma pasta `test/` com JUnit é uma melhoria bem-vinda, desde que não exija Maven.
 
@@ -137,15 +145,26 @@ Depois de qualquer reorganização, confirme no mínimo: `docker build .` passa 
 - Comentários curtos em português, explicando o porquê.
 - Mensagens para o usuário em português simples, dizendo o que corrigir.
 - Commits em português, no imperativo e com assunto curto (ex.: `Corrige validação de lote`). Um assunto por commit.
-- Não acrescente linhas de coautoria, assinatura ou link de sessão de assistentes de IA nos commits, no código ou na documentação. A autoria é da Equipe SaaSquad.
+- Não acrescente linhas de coautoria, assinaturas ou links de sessão nos commits, no código ou na documentação.
+- Autoria: Gabriel Souza Silva é o autor e mantenedor; quem contribui aparece como contribuidor pelos próprios commits e pull requests. Nunca altere a autoria de commits de outras pessoas.
 - Não reformatar arquivos inteiros sem pedido: diffs pequenos facilitam a revisão do dono.
 
-## 10. Ideias de organização (só faça o que o dono pedir)
+## 10. Fluxo de branches e pull requests
 
-Já feito: `docs/`, `LICENSE` (todos os direitos reservados), `CHANGELOG.md`, `.gitattributes` e o workflow de build. Ainda em aberto:
+O repositório tem colaboradores. O fluxo completo está no `CONTRIBUTING.md`; o essencial:
 
-- Capturas de tela das principais telas em `docs/imagens/`, referenciadas no README.
-- Modelos de issue e de pull request em `.github/`.
+- Nunca trabalhe nem envie commits direto na `main`. Crie uma branch a partir da `main` atualizada: `feature/<assunto>`, `fix/<assunto>` ou `docs/<assunto>`.
+- Toda mudança chega à `main` por pull request, com o modelo preenchido (o que mudou, como testar, migração de banco, impacto na produção), o workflow **Build** passando e a aprovação do mantenedor.
+- Abra o pull request e pare: o merge é feito pelo mantenedor, depois da revisão.
+- Nunca reescreva o histórico da `main` (`commit --amend`, `rebase` ou `push --force`). Numa branch que outras pessoas já baixaram, também não, sem combinar.
+- Não altere a autoria de commits de outras pessoas.
+- Só o que está na `main` vai para produção, e quem atualiza o servidor é o mantenedor.
+
+## 11. Ideias de organização (só faça o que o dono pedir)
+
+Já feito: `docs/`, `LICENSE` (MIT) com `NOTICE`, `CHANGELOG.md`, `.gitattributes`, o workflow de build, `CONTRIBUTING.md` e os modelos de issue e de pull request. Ainda em aberto:
+
+- Capturas de tela reais das principais telas em `docs/assets/`, referenciadas no README.
 - Testes JUnit em `test/`.
 - Mover `deploy/atualiza-usuarios.sql` para `deploy/migracoes/` (lembrando de atualizar README e instruções).
 
