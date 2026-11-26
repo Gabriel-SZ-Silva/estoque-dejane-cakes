@@ -13,6 +13,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 - `NOTICE` com os itens que não estão cobertos pela licença MIT: o MySQL Connector/J (licença própria da Oracle) e a marca e a logomarca "Dejane Cakes".
 
 ### Alterado
+- Contribuidores Fernando Gabriel e Danilo dos Santos Lopes listados no README e no `AGENTS.md`, com o usuário de cada um no GitHub.
 - README com sumário, seções Topologia de infraestrutura e Testes, selo dinâmico do workflow Build e estrutura do projeto atualizada.
 - Licença trocada de "todos os direitos reservados" para MIT, em nome de Gabriel Souza Silva. README e `AGENTS.md` atualizados.
 - Autoria: Gabriel Souza Silva passa a constar como autor e mantenedor. O README ganhou as seções Autor e Contribuidores, e o `AGENTS.md` descreve a autoria de mantenedor e contribuidores.
