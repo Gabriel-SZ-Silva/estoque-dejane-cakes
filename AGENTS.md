@@ -1,6 +1,6 @@
-# AGENTS.md: contexto do projeto para assistentes de IA
+# AGENTS.md: contexto do projeto
 
-Leia este arquivo inteiro antes de mexer no repositório. Ele descreve o que o projeto é, como está organizado, o que **não pode quebrar** e como trabalhar aqui. As instruções do dono do repositório (Gabriel) vêm sempre antes das sugestões deste arquivo.
+Leia este arquivo inteiro antes de mexer no repositório. Ele descreve o que o projeto é, como está organizado, o que **não pode quebrar** e como trabalhar aqui. As instruções do dono do repositório (Gabriel Souza Silva, autor e mantenedor) vêm sempre antes das sugestões deste arquivo.
 
 ## 1. Identificação
 
@@ -9,7 +9,8 @@ Leia este arquivo inteiro antes de mexer no repositório. Ele descreve o que o p
 | Projeto | Sistema de Estoque Dejane Cakes (nome técnico: `SistemaConfeitaria`) |
 | Repositório | `github.com/Gabriel-SZ-Silva/estoque-dejane-cakes`, branch `main` |
 | Cliente | Dejane Cakes, confeitaria MEI em Mogi das Cruzes (SP) |
-| Equipe | SaaSquad (projeto acadêmico, UMC) |
+| Autoria | Gabriel Souza Silva, autor e mantenedor. Colaboradores enviam pull requests e aparecem como contribuidores |
+| Origem | Iniciado como projeto acadêmico na Universidade de Mogi das Cruzes (UMC) |
 | Situação | MVP **em produção** desde 23/11/2026, com dados reais da cliente |
 | Objetivo | Controle de estoque de insumos, receitas e produção (baixa automática), com alertas de validade |
 | Idioma | Português do Brasil em tudo: código, comentários, telas, commits e documentação |
@@ -138,7 +139,8 @@ Depois de qualquer reorganização, confirme no mínimo: `docker build .` passa 
 - Comentários curtos em português, explicando o porquê.
 - Mensagens para o usuário em português simples, dizendo o que corrigir.
 - Commits em português, no imperativo e com assunto curto (ex.: `Corrige validação de lote`). Um assunto por commit.
-- Não acrescente linhas de coautoria, assinatura ou link de sessão de assistentes de IA nos commits, no código ou na documentação. A autoria é da Equipe SaaSquad.
+- Não acrescente linhas de coautoria, assinaturas ou links de sessão nos commits, no código ou na documentação.
+- Autoria: Gabriel Souza Silva é o autor e mantenedor; quem contribui aparece como contribuidor pelos próprios commits e pull requests. Nunca altere a autoria de commits de outras pessoas.
 - Não reformatar arquivos inteiros sem pedido: diffs pequenos facilitam a revisão do dono.
 
 ## 10. Ideias de organização (só faça o que o dono pedir)

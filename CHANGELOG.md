@@ -9,6 +9,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Alterado
 - Licença trocada de "todos os direitos reservados" para MIT, em nome de Gabriel Souza Silva. README e `AGENTS.md` atualizados.
+- Autoria: Gabriel Souza Silva passa a constar como autor e mantenedor. O README ganhou as seções Autor e Contribuidores, e o `AGENTS.md` descreve a autoria de mantenedor e contribuidores.
 
 ## [1.1.0] - 2026-11-23
 

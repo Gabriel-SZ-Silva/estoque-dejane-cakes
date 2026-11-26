@@ -21,7 +21,7 @@
 
 A Dejane Cakes é uma confeitaria MEI de Mogi das Cruzes (SP) que controlava o estoque e os pedidos em cadernos. Este sistema substitui o controle manual do estoque: mostra o que há em cada insumo, avisa o que está vencendo, diz se cada receita pode ser feita com o estoque atual e desconta os ingredientes automaticamente a cada produção.
 
-O MVP está **em produção desde 23/11/2026**, acessível pelo navegador do computador ou instalado como app no celular.
+O MVP está **em produção desde 23/11/2026**, acessível pelo navegador do computador ou instalado como app no celular. O projeto foi iniciado como trabalho acadêmico na Universidade de Mogi das Cruzes (UMC).
 
 ## Funcionalidades
 
@@ -123,9 +123,16 @@ Variáveis do arquivo `.env` (modelo em [.env.exemplo](.env.exemplo)):
 - [ ] Módulo de encomendas
 - [ ] Testes automatizados
 
-## Equipe
+## Autor
 
-Desenvolvido pela **Equipe SaaSquad**, como projeto acadêmico na Universidade de Mogi das Cruzes (UMC), para a Dejane Cakes.
+**Gabriel Souza Silva**, autor e mantenedor.
+
+- GitHub: [Gabriel-SZ-Silva](https://github.com/Gabriel-SZ-Silva)
+- LinkedIn: [gabriel-souza-silva-6689a93b6](https://www.linkedin.com/in/gabriel-souza-silva-6689a93b6)
+
+## Contribuidores
+
+O projeto aceita contribuições por pull request. Cada colaborador trabalha numa branch própria, abre um pull request para a `main` e o mantenedor revisa antes de integrar. Os colaboradores aparecem pelos pull requests aceitos e pela [página de contribuidores](https://github.com/Gabriel-SZ-Silva/estoque-dejane-cakes/graphs/contributors) do GitHub.
 
 ## Licença
 
