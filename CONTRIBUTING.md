@@ -70,13 +70,15 @@ docker compose up -d --build
 
 Acesse `https://localhost` (o navegador avisa sobre o certificado local; pode continuar) e crie a primeira conta em **Primeiro acesso**, com o `CODIGO_INSTALACAO` do `.env`. Para parar, use `docker compose down`: os dados ficam guardados no volume e voltam na próxima subida.
 
+Com `make` instalado (Linux e macOS), os atalhos `make up`, `make down`, `make logs` e `make ps` fazem o mesmo; `make` sem alvo lista todos.
+
 Para rodar pelo NetBeans, siga [docs/instalacao-local.md](docs/instalacao-local.md).
 
 ## Antes de abrir o pull request
 
 O projeto ainda não tem testes automatizados. Confira pelo menos:
 
-- `docker build .` termina sem erro (é o mesmo que o workflow **Build** roda);
+- `docker build .` (ou `make build`) termina sem erro: é o mesmo que o workflow **Build** roda;
 - o sistema sobe localmente e as telas afetadas funcionam no navegador;
 - se a mudança mexe em permissões, confira também com uma conta `VISITANTE` (crie com `bash deploy/usuarios.sh criar <login> visitante`, com os containers rodando);
 - `docs/` e `CHANGELOG.md` estão atualizados.

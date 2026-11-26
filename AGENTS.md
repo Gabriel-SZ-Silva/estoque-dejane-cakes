@@ -50,6 +50,7 @@ Não introduza Spring, Maven, Gradle, Hibernate, Lombok ou frameworks de front-e
 ├── docs/                      índice (docs/README.md), regras de negócio, arquitetura, instalação, publicação e operação
 ├── banco.sql                  cria o banco completo (usado pelo Docker na 1ª subida)
 ├── Dockerfile                 compila e empacota o app no Tomcat
+├── Makefile                   atalhos: build, up, down (sem -v), logs, ps, backup
 ├── docker-compose.yml         banco + app + caddy (produção)
 ├── docker-compose.override.yml ajustes para servidor de 1 GB (lido automaticamente)
 ├── .env.exemplo               modelo das variáveis secretas (o .env real nunca vai ao Git)
@@ -125,7 +126,8 @@ O detalhamento está em `docs/regras-de-negocio.md` e `docs/arquitetura.md`. Mud
 ## 7. Como compilar e testar
 
 - **Docker (qualquer sistema):** copie `.env.exemplo` para `.env`, preencha, e rode `docker compose up -d --build`. O app fica atrás do Caddy nas portas 80/443.
-- **Só compilar, para conferir:** `docker build .` (falha se algum `.java` não compilar).
+- **Só compilar, para conferir:** `docker build .` ou `make build` (falha se algum `.java` não compilar).
+- **Atalhos:** o `Makefile` tem `build`, `up`, `down`, `logs`, `ps` e `backup`. O alvo `down` nunca pode ganhar `-v`. Não há alvo `test` porque não há testes; só acrescente um quando existirem testes de verdade.
 - **NetBeans:** abrir a pasta como projeto, Tomcat 11 cadastrado em Servers, MySQL local com o `banco.sql` executado. Sem variáveis de ambiente, `util/FabricaConexao` usa `jdbc:mysql://localhost:3306/dejane_cakes_db` com root/admin (padrão só de desenvolvimento).
 - **Testes automatizados:** ainda não estão no repositório (existiu um roteiro de verificação fora dele). Uma pasta `test/` com JUnit é uma melhoria bem-vinda, desde que não exija Maven.
 

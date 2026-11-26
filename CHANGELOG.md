@@ -9,6 +9,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 - Seção "Fluxo de branches e pull requests" no `AGENTS.md`.
 - Modelo de pull request (`.github/pull_request_template.md`) e modelos de issue para relato de erro e sugestão de melhoria (`.github/ISSUE_TEMPLATE/`).
 - `docs/README.md` como índice da documentação.
+- `Makefile` com os atalhos `build`, `up`, `down` (sem `-v`, mantém o banco), `logs`, `ps` e `backup`.
 - `NOTICE` com os itens que não estão cobertos pela licença MIT: o MySQL Connector/J (licença própria da Oracle) e a marca e a logomarca "Dejane Cakes".
 
 ### Alterado

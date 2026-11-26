@@ -77,6 +77,21 @@ docker compose up -d --build
 
 Acesse `https://<DOMINIO>` e use **Primeiro acesso** com o `CODIGO_INSTALACAO` do `.env`.
 
+### Atalhos com make
+
+Em Linux e macOS, o `Makefile` encurta os comandos mais usados. No Windows, ou sem `make`, use os comandos da segunda coluna.
+
+| Atalho | Comando | O que faz |
+| --- | --- | --- |
+| `make build` | `docker build -t estoque-dejane-cakes .` | Compila a aplicação, como o workflow Build |
+| `make up` | `docker compose up -d --build` | Sobe banco, app e Caddy (exige o `.env` preenchido) |
+| `make down` | `docker compose down` | Para os containers e mantém os dados do banco |
+| `make logs` | `docker compose logs -f --tail=100` | Acompanha os logs (`make logs SERVICO=app` para um serviço só) |
+| `make ps` | `docker compose ps` | Mostra a situação dos containers |
+| `make backup` | `bash deploy/backup.sh` | Gera uma cópia do banco em `backups/` |
+
+`make` sem alvo lista os atalhos. Nenhum deles apaga o volume do banco.
+
 ### Com NetBeans
 
 Requisitos: JDK 25, Apache NetBeans, Tomcat 11 e MySQL 8.4. Execute o `banco.sql`, abra a pasta como projeto e rode com F6. Passo a passo em [docs/instalacao-local.md](docs/instalacao-local.md).
