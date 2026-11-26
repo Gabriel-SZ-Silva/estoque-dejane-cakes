@@ -106,6 +106,8 @@ Variáveis do arquivo `.env` (modelo em [.env.exemplo](.env.exemplo)):
 
 ## Documentação
 
+O índice completo está em [docs/README.md](docs/README.md).
+
 | Documento | Conteúdo |
 | --- | --- |
 | [Regras de negócio](docs/regras-de-negocio.md) | Insumos, receitas, produção, validade, lixeira, desfazer e perfis |

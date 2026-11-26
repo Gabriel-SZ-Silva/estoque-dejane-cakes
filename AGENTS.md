@@ -47,7 +47,7 @@ Não introduza Spring, Maven, Gradle, Hibernate, Lombok ou frameworks de front-e
 │   ├── workflows/build.yml    compila com `docker build .` a cada push na main e em pull requests
 │   ├── pull_request_template.md modelo de pull request
 │   └── ISSUE_TEMPLATE/        modelos de relato de erro e de sugestão de melhoria
-├── docs/                      regras de negócio, arquitetura, instalação, publicação e operação
+├── docs/                      índice (docs/README.md), regras de negócio, arquitetura, instalação, publicação e operação
 ├── banco.sql                  cria o banco completo (usado pelo Docker na 1ª subida)
 ├── Dockerfile                 compila e empacota o app no Tomcat
 ├── docker-compose.yml         banco + app + caddy (produção)
