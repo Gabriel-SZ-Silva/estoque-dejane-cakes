@@ -6,6 +6,7 @@
 
 **Controle de insumos, receitas e produção para uma confeitaria artesanal.**
 
+[![Build](https://github.com/Gabriel-SZ-Silva/estoque-dejane-cakes/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/Gabriel-SZ-Silva/estoque-dejane-cakes/actions/workflows/build.yml)
 ![Java 25](https://img.shields.io/badge/Java-25-aa0000)
 ![Jakarta EE](https://img.shields.io/badge/Servlet%2FJSP-Tomcat%2011-aa0000)
 ![MySQL 8.4](https://img.shields.io/badge/MySQL-8.4-2A1517)
@@ -16,6 +17,23 @@
 </div>
 
 ---
+
+## Sumário
+
+- [Sobre o projeto](#sobre-o-projeto)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologias](#tecnologias)
+- [Arquitetura](#arquitetura)
+- [Topologia de infraestrutura](#topologia-de-infraestrutura)
+- [Começando](#começando)
+- [Configuração](#configuração)
+- [Estrutura do projeto](#estrutura-do-projeto)
+- [Documentação](#documentação)
+- [Testes](#testes)
+- [Próximos passos](#próximos-passos)
+- [Autor](#autor)
+- [Contribuidores](#contribuidores)
+- [Licença](#licença)
 
 ## Sobre o projeto
 
@@ -61,6 +79,30 @@ flowchart LR
 ```
 
 Aplicação em camadas com os padrões **Front Controller**, **Command**, **Factory**, **DAO** e **Decorator**, seguindo os princípios SOLID. Detalhes, modelo de dados e medidas de segurança em [docs/arquitetura.md](docs/arquitetura.md).
+
+## Topologia de infraestrutura
+
+Em produção, o sistema roda numa VM Ubuntu 24.04 da Microsoft Azure (Azure for Students, 1 GB de RAM + 2 GB de swap), com três containers do Docker Compose. Só o Caddy publica portas para a internet; o Tomcat e o MySQL ficam na rede interna do Compose. O endereço é um subdomínio do DuckDNS.
+
+```mermaid
+flowchart LR
+    U[Navegador ou app PWA] -->|HTTPS 80/443| CADDY
+    subgraph VM["VM Ubuntu 24.04 · Docker Compose"]
+        CADDY[caddy<br/>Caddy 2] -->|HTTP 8080| APP[app<br/>Tomcat 11 + Java 25]
+        APP -->|JDBC 3306| BANCO[(banco<br/>MySQL 8.4)]
+        BANCO --- VOL[(volume dados-mysql)]
+        CRON[cron 03:00<br/>deploy/backup.sh] -->|mysqldump| BANCO
+        CRON --> BKP[backups/<br/>14 dias]
+    end
+```
+
+| Serviço | Imagem | Portas | Memória (override) | Dados |
+| --- | --- | --- | --- | --- |
+| `caddy` | `caddy:2` | 80 e 443, publicadas | 64 MB | Volumes `dados-caddy` e `config-caddy` (certificados) |
+| `app` | Build do `Dockerfile` (Tomcat 11, Java 25) | 8080, só na rede interna | 450 MB | Nenhum |
+| `banco` | `mysql:8.4` | 3306, só na rede interna | 350 MB | Volume `dados-mysql` |
+
+Os limites de memória vêm do `docker-compose.override.yml`. Detalhes em [docs/publicacao.md](docs/publicacao.md) e [docs/operacao.md](docs/operacao.md).
 
 ## Começando
 
@@ -110,13 +152,16 @@ Variáveis do arquivo `.env` (modelo em [.env.exemplo](.env.exemplo)):
 ## Estrutura do projeto
 
 ```
+├── .github/           workflow Build e modelos de pull request e de issue
 ├── src/java/          código Java (controller, command, factory, dao, model, decorator, filter, util)
 ├── web/               telas JSP, CSS, imagens, PWA e WEB-INF
 ├── deploy/            Caddyfile, backup, restauração, gestão de contas e migrações
-├── docs/              documentação detalhada
+├── docs/              documentação detalhada (índice em docs/README.md)
 ├── banco.sql          criação do banco
 ├── Dockerfile         build da aplicação
-└── docker-compose.yml banco, aplicação e HTTPS
+├── docker-compose.yml banco, aplicação e HTTPS
+├── Makefile           atalhos para os comandos do Docker Compose
+└── CONTRIBUTING.md    como contribuir
 ```
 
 ## Documentação
@@ -131,6 +176,10 @@ O índice completo está em [docs/README.md](docs/README.md).
 | [Publicação](docs/publicacao.md) | Colocar no ar num servidor, atualizar e migrar o banco |
 | [Operação](docs/operacao.md) | Contas de usuário, backup, restauração e diagnóstico |
 | [Histórico de versões](CHANGELOG.md) | O que mudou em cada versão |
+
+## Testes
+
+Ainda não há testes automatizados. O workflow **Build** compila a aplicação com `docker build .` a cada envio para a `main` e em cada pull request (localmente: `make build`).
 
 ## Próximos passos
 
@@ -149,7 +198,7 @@ O índice completo está em [docs/README.md](docs/README.md).
 
 ## Contribuidores
 
-O projeto aceita contribuições por pull request. Cada colaborador trabalha numa branch própria, abre um pull request para a `main` e o mantenedor revisa antes de integrar. Os colaboradores aparecem pelos pull requests aceitos e pela [página de contribuidores](https://github.com/Gabriel-SZ-Silva/estoque-dejane-cakes/graphs/contributors) do GitHub.
+O projeto aceita contribuições por pull request. Cada colaborador trabalha numa branch própria, abre um pull request para a `main` e o mantenedor revisa antes de integrar. Os colaboradores aparecem pelos pull requests aceitos e pela [página de contribuidores](https://github.com/Gabriel-SZ-Silva/estoque-dejane-cakes/graphs/contributors) do GitHub. Para contribuir, leia o [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Licença
 
