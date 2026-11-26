@@ -198,7 +198,12 @@ Ainda não há testes automatizados. O workflow **Build** compila a aplicação 
 
 ## Contribuidores
 
-O projeto aceita contribuições por pull request. Cada colaborador trabalha numa branch própria, abre um pull request para a `main` e o mantenedor revisa antes de integrar. Os colaboradores aparecem pelos pull requests aceitos e pela [página de contribuidores](https://github.com/Gabriel-SZ-Silva/estoque-dejane-cakes/graphs/contributors) do GitHub. Para contribuir, leia o [CONTRIBUTING.md](CONTRIBUTING.md).
+| Nome | GitHub |
+| --- | --- |
+| Fernando Gabriel | [BinnBingus](https://github.com/BinnBingus) |
+| Danilo dos Santos Lopes | [lopes-danilo](https://github.com/lopes-danilo) |
+
+O projeto aceita contribuições por pull request. Cada colaborador trabalha numa branch própria, abre um pull request para a `main` e o mantenedor revisa antes de integrar. As contribuições de cada pessoa aparecem nos pull requests aceitos e na [página de contribuidores](https://github.com/Gabriel-SZ-Silva/estoque-dejane-cakes/graphs/contributors) do GitHub. Para contribuir, leia o [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Licença
 

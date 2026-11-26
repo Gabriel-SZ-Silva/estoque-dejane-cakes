@@ -10,6 +10,7 @@ Leia este arquivo inteiro antes de mexer no repositório. Ele descreve o que o p
 | Repositório | `github.com/Gabriel-SZ-Silva/estoque-dejane-cakes`, branch `main` |
 | Cliente | Dejane Cakes, confeitaria MEI em Mogi das Cruzes (SP) |
 | Autoria | Gabriel Souza Silva, autor e mantenedor. Colaboradores enviam pull requests e aparecem como contribuidores |
+| Contribuidores | Fernando Gabriel (`BinnBingus`) e Danilo dos Santos Lopes (`lopes-danilo`) |
 | Origem | Iniciado como projeto acadêmico na Universidade de Mogi das Cruzes (UMC) |
 | Situação | MVP **em produção** desde 23/11/2026, com dados reais da cliente |
 | Objetivo | Controle de estoque de insumos, receitas e produção (baixa automática), com alertas de validade |
